@@ -1,0 +1,2 @@
+docker images    查看镜像
+docker ps -a   查看实例
