@@ -1,0 +1,10 @@
+1.equal与 ==
+2.ref out tuple
+3.高级sql
+4.锁 事务  并发
+5.ef 扩展方发  待完成
+6.多线程
+7.async await    wait(）
+8.linq与ef 
+9.  
+
