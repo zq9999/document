@@ -1,3 +1,6 @@
-docker images    查看镜像
+﻿docker images    查看镜像
 docker ps -a   查看实例
 docker -command 查看docker的所有命令
+docker logs [containerId]   查看某个实例的日志
+docker search [程序名称]   搜索官方的程序镜像
+在某目录下 ls  查看该路径的文件夹
