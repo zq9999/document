@@ -6,5 +6,8 @@
 6.多线程
 7.async await    wait(）
 8.linq与ef 
-9.  
+9.long 类型坑
+10.两阶段   三阶段   tcc
+11.单点登录
+12.
 
