@@ -1,0 +1,16 @@
+﻿docker images    查看镜像
+docker ps -a   查看实例
+docker -command 查看docker的所有命令
+docker logs [containerId]   查看某个实例的日志
+docker search [程序名称]   搜索官方的程序镜像
+在某目录下 ls  查看该路径的文件夹
+docker info 查看docker的配置信息
+
+
+systemctl start docker   启动docker
+验证docker是否启动成功，命令：dockers version
+重启docker，命令：systemctl restart docker
+
+运行发布的dll,下面发布多个，注意80不变
+docker run -d -p 9112:80 -v /aworkspace/hyweb:/app1 --workdir /app1 mcr.microsoft.com/dotnet/core/aspnet  dotnet /app1/hyweb.dll
+docker run -d -p 9111:80 -v /aworkspace/pubWeb:/app --workdir /app mcr.microsoft.com/dotnet/core/aspnet  dotnet /app/htweb.dll
