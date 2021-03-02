@@ -1,0 +1,12 @@
+ # yum -y groups install "GNOME Desktop"
+# startx  
+# yum install  epel* -y
+
+# yum --enablerepo=epel -y install xrdp
+ 
+# systemctl start xrdp
+# systemctl enable xrdp
+然后据可以通过本地远程连接访问了
+
+原文地址：
+https://www.cnblogs.com/studyforever/p/9132437.html
