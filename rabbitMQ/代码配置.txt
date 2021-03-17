@@ -1,0 +1,8 @@
+            ConnectionFactory factory = new ConnectionFactory();
+            factory.UserName = "root";
+            factory.Password = "sa123";
+            factory.HostName = "42.193.96.96";
+            factory.VirtualHost = "/";
+            factory.Port = 9182 ;   //对应5672
+            IConnection iConnection = factory.CreateConnection();
+            IModel ichannel = iConnection.CreateModel();
