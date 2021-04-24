@@ -1,0 +1,5 @@
+DevOps、Docker、Service Fabric、.Net Core、Sola、redis、消息队列rabbitMQ、集中式日志EKL、应用监控Metrics、微服务框架MSA、分布式协调器ZooKeeper、发布工具 Jenkins、调试工具 WinDbg；
+
+G:\BaiduYunDownload\css 传智
+
+最新国内开源的ERP系统   CEO开源ERP（ERP董事长）

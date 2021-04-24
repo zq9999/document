@@ -1,0 +1,15 @@
+Equals
+CompareTo
+GetHashCode
+ System.Dynamic.ExpandoObject
+布隆过滤器
+
+Equals：
+Equals比较的永远是变量的内容是否相同，而= =比较的则是引用地址是否相同
+(前提:此种类型内部没有对Equals 或= = 进行重写操作，否则输出可能会有不同)
+string 类型是个特例，因为他的内部对这两个都进行了重写
+
+
+GetHashCode:
+如果两个字符串对象是否相等，GetHashCode方法返回完全相同的值
+不同的字符串可能会返回相同的哈希代码

@@ -1,0 +1,15 @@
+select * from  [Md_Tag_Info]  where ID in(
+select distinct(tagId) from Md_Menu_Tag
+)
+等价的
+select * from  [Md_Tag_Info] tagInfo where exists (
+  select  ID from Md_Menu_Tag mt where mt.TagId=tagInfo.ID
+)
+
+--EXISTS用于检查子查询是否至少会返回一行数据，该子查询实际上并不返回任何数据，而是返回值True或False
+--EXISTS 指定一个子查询，检测 行 的存在。
+
+
+
+exec sp_executesql @sql,N'@payMoney decimal(10,2) output',@getPay output
+ 

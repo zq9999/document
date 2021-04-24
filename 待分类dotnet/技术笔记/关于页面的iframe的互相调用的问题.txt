@@ -1,0 +1,46 @@
+document.getElementById("myiframe").contentWindow，得到iframe对象后，就可以通过contentWindow得到iframe包含页面的window对象，然后就可以正常访问页面元素了；
+$("#myiframe")[0].contentWindow，jquery选择器获得iframe，先把jquery对象转换为DOM对象，或者使用get()方法转换；
+3、$("#myiframe")[0].contentWindow.$("#dd").val()，可以在得到iframe的window对象后接着使用jquery选择器进行页面操作；
+4、$("#myiframe")[0].contentWindow.username="zhangsan"; 可以通过这种方式向iframe页面传递参数，在iframe页面window.username就可以获取到值，username是自定义的全局变量；
+
+
+
+"window.location.href"、"location.href"是本页面跳转 
+"parent.location.href"是上一层页面跳转 
+"top.location.href"是最外层的页面跳转 
+
+ 
+如果A,B,C,D都是jsp，D是C的iframe，C是B的iframe，B是A的iframe，如果D中js这样写 
+"window.location.href"、"location.href"：D页面跳转 
+"parent.location.href"：C页面跳转 
+"top.location.href"：A页面跳转 
+现在终于明白了连接的时候target的用法了： 
+_blank：重新打开一个窗口 
+_parent：父窗口执行重定向 
+_self：自身页面重定向 
+_top:第一个父窗口重定向 
+综上所述可知：parent.window:父窗口对象 top.window:第一个父窗口的对象 
+
+ 
+window.parent 是iframe页面调用父页面对象，当我们想从iframe内嵌的页面中访问外层页面是可以直接利用window.parent获取； 
+ 
+
+window.opener 是window.open或超链接<a> 打开的子页面调用父页面对象 
+
+
+
+
+下面来举几个常用的例子： 
+parent.window与top.window一般在分割的页面即 frameset或iframe中使用 
+注销整个框架后返回到login.aspx：parent.window.location='Login.aspx'或者 
+top.window.location='Login.aspx' 
+window.parent也是常在框架中使用， 
+刷新：window.parent.location.reload();或者刷新某个框架：window.parent.MainForm.location.reload(); 
+获得其他框架的元素值：window.parent.MainForm.form1.text1.value; 
+window.opener主要是获得通过超链接或者 window.open() 打开本身页面的页面的一些，比如获得值，刷新等 
+刷新：window.opener.location.reload(); 
+获值：window.opener.document.getElement("txtName").value; 
+后退：top.playFrame.history.go(-1); 
+前进： top.playFrame.history.go(1); 
+刷新： top.playFrame.location.reload(); 
+就总结到这里，这些对象很实用 

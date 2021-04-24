@@ -1,0 +1,46 @@
+打开运行 输入 cmd，按回车
+
+方法一：
+输入cd C:\Windows\Microsoft.NET\Framework\v4.0.30319，回车，
+然后输入InstallUtil  youServiceTotalPath.exe
+
+方法二：
+安装服务：
+installutil.exe E:\XTestDemo\X_15_WindowsService\bin\Debug\X_15_WindowsService.exe
+卸载服务：
+installutil.exe /u E:\XTestDemo\X_15_WindowsService\bin\Debug\X_15_WindowsService.exe
+
+
+卸载
+installutil /u yourproject.exe
+
+ 
+1.Service启动属性：
+
+        Manual      服务安装后，必须手动启动。
+
+        Automatic    每次计算机重新启动时，服务都会自动启动。
+
+        Disabled     服务无法启动。
+
+ 
+
+2.新建的Service项目，其中各属性的含义（设计视图->右键属性）：
+
+　　Autolog 是否自动写入系统的日志文件
+
+　　CanHandlePowerEvent 服务时候接受电源事件
+
+　　CanPauseAndContinue 服务是否接受暂停或继续运行的请求
+
+　　CanShutdown 服务是否在运行它的计算机关闭时收到通知，以便能够调用 OnShutDown 过程
+
+　　CanStop 服务是否接受停止运行的请求
+
+　　ServiceName 服务名
+
+ 
+
+3. 也可以在系统服务管理器中，设置相应Service的属性或启动方式等
+
+计算机管理 -> 服务和应用程序  -> 服务  -> ...

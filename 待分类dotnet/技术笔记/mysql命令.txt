@@ -1,0 +1,6 @@
+SHOW VARIABLES LIKE "general_log%" ;
+
+
+SET GLOBAL general_log = 'ON';
+
+set global general_log_file='zqcrud.lg'; -- 设置日志文件保存位置

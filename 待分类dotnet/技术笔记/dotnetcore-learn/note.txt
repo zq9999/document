@@ -1,0 +1,8 @@
+﻿1.Install-Package Microsoft.EntityFrameworkCore
+2.Install-Package Microsoft.EntityFrameworkCore.SqlServer
+3.Install-Package Microsoft.EntityFrameworkCore.Tools –Pre
+4.Add-Migration newBook
+5.Update-Database
+
+
+6.http://www.cnblogs.com/Jack-Blog/p/4699596.html?ptvd   启用多个dbcontext

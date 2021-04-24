@@ -1,13 +1,13 @@
-1.equal与 ==
+﻿1.equal与 ==
 2.ref out tuple
 3.高级sql
 4.锁 事务  并发
 5.ef 扩展方发  待完成
-6.多线程
+6.多线程 Thread/pool
 7.async await    wait(）
 8.linq与ef 
 9.long 类型坑
 10.两阶段   三阶段   tcc
 11.单点登录
-12.
+12.cap
 

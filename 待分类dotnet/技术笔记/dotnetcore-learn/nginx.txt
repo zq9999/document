@@ -1,0 +1,26 @@
+1.netstat -aon|findstr "80"    查看80端口是否被占用
+
+
+2.nginx 的作用：
+a.http反向代理服务器  
+b.负载均衡服务器  
+c.邮件代理服务器
+d.实现前段动静分离
+
+3.nginx特点   高稳定，高性能，资源占用少，功能丰富，模块化结构
+
+4.nginx.conf  基本配置文件
+  mime.types:mime类型关联的扩展文件 
+  fastcgi.conf  php用的
+   proxy.conf   与proxy相关的配置
+   site.conf    与网站相关的配置，包括虚拟主机
+   以上三个.conf文件可以写在一起（合在nginx里面）
+
+5.启动nginx的时候会启动一个master进程，这个进程产生worker进程，一个work进程处理一个request
+
+6.
+~*  不区分大小写   ~ 区分大小写   = 精确匹配
+
+^~ 以指定模式开始，如果匹配，则停止搜索其他
+
+7.index  index.html index.htm  设置主页

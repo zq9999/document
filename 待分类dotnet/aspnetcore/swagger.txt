@@ -1,0 +1,66 @@
+NSwag.AspNetCore
+
+public void ConfigureServices(IServiceCollection services)
+{ 
+    // Register the Swagger services
+    services.AddSwaggerDocument();
+}
+
+public void Configure(IApplicationBuilder app)
+{
+    app.UseStaticFiles();
+
+    // Register the Swagger generator and the Swagger UI middlewares
+    app.UseOpenApi();
+    app.UseSwaggerUi3();
+
+    app.UseMvc();
+}
+
+
+启动应用。 转到：
+http://localhost:<port>/swagger，以查看 Swagger UI。
+http://localhost:<port>/swagger/v1/swagger.json，以查看 Swagger 规范。
+
+
+  [Route("api/[controller]/[action]")]
+    [ApiController]
+    public class UserController : ControllerBase
+    {  
+
+    }
+
+
+启用XML 注释
+右键单击“解决方案资源管理器”中的项目，然后选择“属性”
+查看“生成”选项卡的“输出”部分下的“XML 文档文件”框
+
+取消显示警告 ：后面代码加上 1701;1702;1591
+
+
+
+
+
+API 信息和说明
+在 Startup.ConfigureServices 方法中，传递给 AddSwaggerDocument 方法的配置操作会添加诸如作者、许可证和说明的信息：
+services.AddSwaggerDocument(config =>
+{
+    config.PostProcess = document =>
+    {
+        document.Info.Version = "v1";
+        document.Info.Title = "ToDo API";
+        document.Info.Description = "A simple ASP.NET Core web API";
+        document.Info.TermsOfService = "None";
+        document.Info.Contact = new NSwag.OpenApiContact
+        {
+            Name = "Shayne Boyer",
+            Email = string.Empty,
+            Url = "https://twitter.com/spboyer"
+        };
+        document.Info.License = new NSwag.OpenApiLicense
+        {
+            Name = "Use under LICX",
+            Url = "https://example.com/license"
+        };
+    };
+});

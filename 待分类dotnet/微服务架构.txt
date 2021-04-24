@@ -1,0 +1,26 @@
+CAP:
+C:Consistency   一致性
+A:Availability    可用性
+P:Partition tolerance    分区容错
+
+
+Base理论：
+Basically Available(基本可用)
+Soft state（软状态）：允许系统中的数据存在中间状态，并认为该状态不影响系统的整体可用性，即允许系统在多个不同节点的数据副本存在数据延时。
+Eventually consistent  （最终一致性）
+
+
+TCC：  try-confirm-cancel
+Apollo:配置中心\
+
+系统优化的第一步：缓存【成本也低】
+level1:应用程序  数据库   文件服务器分离
+level2:
+集群：一个服务器干的事由多个服务器共同承载，每个服务器都是独立完成的
+分布式：一个服务器做的事情由多个服务器协作完成，每台服务器完成其中一部分
+数据库读写分离-数据同步用的是发布订阅
+分库分表表分区
+
+
+
+待了解：缓存穿透，缓存击穿

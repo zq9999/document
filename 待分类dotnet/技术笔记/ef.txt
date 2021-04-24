@@ -1,0 +1,24 @@
+private static IDependencyResolver resolver;
+ IServiceCollection services = new ServiceCollection()
+           .AddSingleton<IFoo, Foo>() 
+     IServiceProvider serviceProvider = new ServiceCollection().BuildServiceProvider();
+  IServiceProvider serviceProvider = services.BuildServiceProvider();
+Get-Help about_EntityFrameworkCore
+
+
+
+
+.IsConcurrencyToken();    [ConcurrencyCheck]
+.IsRowVersion();     [Timestamp]
+
+ .OnDelete(DeleteBehavior.Cascade);
+
+
+
+.ValueGeneratedOnAddOrUpdate();
+.ValueGeneratedOnAdd();
+.ValueGeneratedNever();
+HasColumnType
+
+
+MiniProfiler  实时监控页面请求对应执行的sql语句、执行时间。简单、方便、针对性强。

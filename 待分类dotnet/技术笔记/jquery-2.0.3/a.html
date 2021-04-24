@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src='jquery-2.0.3.js'></script>
+    <script>
+        // console.log($.type("1"));
+        // console.log($.type([1, 2]));
+        // console.log($.type({}));
+        // console.log($.type(1));
+        // console.log($.type(true));
+        // console.log($.type(null));
+        // console.log($.type(undefined));
+        // console.log($.type(a)); 
+        // function a() {}
+
+        // function fuck() {
+        //     return new fuck.prototype.init();
+        // }
+
+        // fuck.prototype.css = function() {
+        //     alert("css");
+        // }
+        // fuck.prototype.init = function() {
+        //     alert("init");
+        // }
+        // fuck.prototype.init.prototype = fuck.prototype;
+        // fuck().css();
+
+
+
+        // var str = "我爱北京，我爱北京天安门，我爱你";
+
+        // var reg = /(我爱*)|(北京*)/g;
+        // var result = reg.exec(str);
+        // console.dir(result);
+
+        // while ((result = reg.exec(str)) != null) {
+        //     console.dir(result);
+        //     console.dir(reg.lastIndex);
+        // }
+
+        // $(function() {
+        //     var arr = [{
+        //         name: "jack",
+        //         age: 23
+        //     }, {
+        //         name: "wade",
+        //         age: 45
+        //     }, {
+        //         name: "dancan",
+        //         age: 63
+        //     }, {
+        //         name: "liming",
+        //         age: 81
+        //     }];
+        //     console.log(arr);
+        //     arr = jQuery.grep(arr, function(n, i) {
+        //         return n.age > 30;
+        //     });
+
+        //     console.log(arr);
+        // })
+
+        var jq = $.noConflict();
+        jq(function() {
+            jq("#f1").attr("checked", "checked");
+        })
+    </script>
+    <style>
+        ul {
+            list-style: none;
+        }
+    </style>
+
+    <body>
+        <ul>
+            <li><input id="f1" type="checkbox">asasas </li>
+            <li><input type="checkbox">asasas </li>
+            <li><input type="checkbox">asasas </li>
+            <li><input type="checkbox">asasas </li>
+            <li><input type="checkbox">asasas </li>
+            <li><input type="checkbox">asasas </li>
+            <li><input type="checkbox">asasas </li>
+        </ul>
+    </body>
+
+</html>

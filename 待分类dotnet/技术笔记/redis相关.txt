@@ -1,0 +1,6 @@
+StackExchange.Redis 和 ServiceStack.Redis 两者性能差距不大，性能差别仅 11%
+StackExchange.Redis 没有版权限制， ServiceStack.Redis不付费只能用 6000 次/每小时。
+
+ServiceStack.Redis最新版已经收费，所以用StackExchange.Redis
+Redis全称为：Remote Dictionary Server（远程数据服务）
+一款内存高速缓存数据库，是一个key-value存储系统，它支持丰富的数据类型，如：string、list、set、zset(sorted set)、hash

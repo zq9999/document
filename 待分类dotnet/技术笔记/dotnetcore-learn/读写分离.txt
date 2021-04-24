@@ -1,0 +1,46 @@
+public class MyHttpApplication : HttpApplication
+    {
+        protected void Application_Start()
+        {
+            DbInterception.Add(new DbMasterSlaveCommandInterceptor());
+        }
+    }
+
+
+
+
+
+
+public class DbMasterSlaveCommandInterceptor : DbCommandInterceptor
+    {
+        private string masterConnectionString = "server=192.168.0.99;port=3306;user id=root;password=123456;persistsecurityinfo=True;database=testdb";
+        private string slaveConnectionString = "server=192.168.0.101;port=3306;user id=root;password=123456;persistsecurityinfo=True;database=testdb";
+        public override void ReaderExecuting(DbCommand command, DbCommandInterceptionContext<DbDataReader> interceptionContext)
+        {
+            this.UpdateConnectionString(interceptionContext, this.slaveConnectionString);
+        }
+        public override void ScalarExecuting(DbCommand command, DbCommandInterceptionContext<object> interceptionContext)
+        {
+            this.UpdateConnectionString(interceptionContext, this.slaveConnectionString);
+        }
+        public override void NonQueryExecuting(DbCommand command, DbCommandInterceptionContext<int> interceptionContext)
+        {
+            this.UpdateConnectionString(interceptionContext, this.masterConnectionString);
+        }
+        private void UpdateConnectionString(DbInterceptionContext interceptionContext, string connectionString)
+        {
+            foreach (var context in interceptionContext.DbContexts)
+            {
+                this.UpdateConnectionString(context.Database.Connection, connectionString);
+            }
+        }
+        private void UpdateConnectionString(DbConnection conn, string connectionString)
+        {
+            ConnectionState state = conn.State;
+            if (state == ConnectionState.Open)
+                conn.Close();
+            conn.ConnectionString = connectionString;
+            if (state == ConnectionState.Open)
+                conn.Open();
+        }
+    }

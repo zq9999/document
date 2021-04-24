@@ -1,0 +1,42 @@
+cmd 路径切换到redis安装目录，然后运行下面命令
+redis-server.exe --service-install redis.windows.conf   注册为windows服务
+注册服务 
+redis-server.exe –service-install redis.windows.conf
+
+删除服务 
+redis-server –service-uninstall
+
+开启服务 
+redis-server –service-start
+
+停止服务 
+redis-server –service-stop
+
+
+连接远程redis
+网上查说是redis默认绑定到127.0.0.1，也就是本地访问，所以需要开启远程访问。
+具体操作：
+1.到Redis安装目录下打开redis.window.conf文件
+2.修改bind 127..0.0.1 为 bind 0.0.0.0
+3.重新启动Redis服务器：redis-server redis.windows.conf
+4.使用远程访问，成功访问
+
+
+
+用记事本或者Notepad++打开redis.windows.conf并找到“# requirepass foobared”这一行，在这一行下面增加一行“requirepass 你的密码”
+
+
+首次输入set命令你会发现出来(error) NOAUTH Authentication required.这是因为你已经更改redis.windows.conf的配置密码，然后键入“auth 你的密码”
+
+使用cmd登录，或直接打开redis-cli
+C:\Users\dell>f:
+
+F:\>cd F:\Redis-x64-3.2.100
+
+F:\Redis-x64-3.2.100>redis-cli.exe -h 127.0.0.1 -p 6379 -a 123
+127.0.0.1:6379>config set requirepass test123   《设置密码     config get requirepass  《查询密码
+
+
+sentinel 哨兵
+
+

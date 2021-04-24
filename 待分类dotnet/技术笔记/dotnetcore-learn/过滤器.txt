@@ -1,0 +1,73 @@
+过滤器类型
+
+每个过滤器类型在过滤管道中的不同阶段执行。
+授权过滤器 首先运行，并用于确定当前用户是否被授权用于当前请求。如果请求未经授权，它们可能使管道短路。
+资源过滤器 是授权后首先处理请求的。它们可以在过滤器管道的其余部分之前运行代码，并且在管道的其余部分完成之后。出于性能原因，它们可用于实现缓存或以其他方式短路过滤器管道。由于它们在模型绑定之前运行，它们对于需要影响模型绑定的任何东西都是有用的。
+操作过滤器 可以在调用单个操作方法之前和之后立即运行代码。它们可用于操作传递到操作中的参数，并从操作返回结果。
+异常过滤器 用于将全局策略应用于在任何事情已写入响应体之前发生的未处理异常。
+结果过滤器 可以在执行单个操作结果之前和之后立即运行代码。只有当action方法成功执行并且对于必须围绕视图或格式化程序执行的逻辑是有用的，它们才会运行。
+
+几个过滤器接口具有可用作自定义实现的基类的对应属性。
+过滤属性：
+ActionFilterAttribute
+ExceptionFilterAttribute
+ResultFilterAttribute
+FormatFilterAttribute
+ServiceFilterAttribute
+TypeFilterAttribute
+
+
+
+IFilterFactory
+
+IFilterFactory工具IFilter。因此，一个IFilterFactory实例可以当做IFilter过滤器实例用作在管道中任何地方。当框架准备调用过滤器时，它会尝试将其转换为IFilterFactory。如果该转换成功，CreateInstance则调用该方法来创建IFilter将被调用的实例。这提供了非常灵活的设计，因为当应用程序启动时，不需要明确设置精确的过滤器管道。
+您可以IFilterFactory将自己的属性实现实现为创建过滤器的另一种方法：
+C＃
+
+复制
+public class AddHeaderWithFactoryAttribute : Attribute, IFilterFactory
+{
+    // Implement IFilterFactory
+    public IFilterMetadata CreateInstance(IServiceProvider serviceProvider)
+    {
+        return new InternalAddHeaderFilter();
+    }
+
+    private class InternalAddHeaderFilter : IResultFilter
+    {
+        public void OnResultExecuting(ResultExecutingContext context)
+        {
+            context.HttpContext.Response.Headers.Add(
+                "Internal", new string[] { "Header Added" });
+        }
+
+        public void OnResultExecuted(ResultExecutedContext context)
+        {
+        }
+    }
+
+    public bool IsReusable
+    {
+        get
+        {
+            return false;
+        }
+    }
+}
+
+
+您可以通过使用属性将过滤器添加到特定操作方法或控制器类。或者，
+
+您可以通过将其添加到类中方法中的MvcOptions.Filters集合中来全局注册过滤器（对于所有控制器和操作）
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddMvc(options =>
+    {
+        options.Filters.Add(new AddHeaderAttribute("GlobalAddHeader", 
+            "Result filter added to MvcOptions.Filters")); // an instance
+        options.Filters.Add(typeof(SampleActionFilter)); // by type
+        options.Filters.Add(new SampleGlobalActionFilter()); // an instance
+    });
+
+    services.AddScoped<AddHeaderFilterWithDi>();
+}

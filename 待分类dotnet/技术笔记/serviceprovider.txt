@@ -1,0 +1,25 @@
+asp.net core ServiceProvider
+ 
+
+针对每次请求所使用的ServiceProvider依然是WebHost的ServiceProvider吗？
+
+　　对于某个由ServiceProvider提供的服务对象说，针对它的回收也是由这个ServiceProvider来完成的。具体来说，非根ServiceProvider在自身被回收的时候，由它提供的采用Scoped和Transient模式的服务实例会自动被回收；至于采用Singleton模式的服务实例，针对它们的回收发生在跟ServiceProvider自身被回收的时候
+
+ 
+
+如果不是 ，那么两者是什么关系？
+
+　　如果我们在这个ServiceProvider上以Transient模式注册了一个服务，这意味着每次从ServiceProvider提取的都是一个全新的对象。如果这些对象引用着一些需要被回收的资源，我们希望资源的回收应该在每次请求处理结束之后自动执行。如果管道每次处理请求时所使用的都是同一个ServiceProvider对象，那么针对服务实例的回收只能在整个应用终止的时候才会发生（因为服务始终被这一个ServiceProvider所引用），这无疑会产生内存泄漏的问题。基于这个原因。管道总是会创建一个新的ServiceProvider来提供处理每个请求所需的服务，并且这个ServiceProvider将在每次请求处理完成之后被自动回收掉。这样一个ServiceProvider被创建之后直接保存到当前的HTTP上下文中，我们可以利用HttpContext如下所示的RequestServices属性得到这个ServiceProvider
+
+ 
+
+总结就是：
+
+单例模式下，服务被根ServiceProvider构建出来，并且由它回收
+
+Scoped和Transient模式下则是由每个单独的http请求中创建的新ServiceProvider构建与回收
+
+
+
+
+用Scope注册的对象，在同一个ServiceProvider的 Scope下相当于单例。

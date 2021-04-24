@@ -1,0 +1,37 @@
+一、IO流（同步、阻塞）
+二、NIO（同步、非阻塞）
+三、NIO2(异步、非阻塞)
+
+IO流简单来说就是input和output流，IO流主要是用来处理设备之间的数据传输
+NIO（同步、非阻塞）
+NIO之所以是同步，是因为它的accept/read/write方法的内核I/O操作都会阻塞当前线程
+首先，我们要先了解一下NIO的三个主要组成部分：Channel（通道）、Buffer（缓冲区）、Selector（选择器）
+
+RPC是远程过程调用 
+gRPC 是一种与语言无关的高性能远程过程调用 (RPC) 框架
+
+
+ 1.RPC 会隐藏底层的通讯细节（不需要直接处理Socket通讯或Http通讯）
+2. RPC 是一个请求响应模型。客户端发起请求，服务器返回响应（类似于Http的工作方式）
+3. RPC 在使用形式上像调用本地函数（或方法）一样去调用远程的函数（或方法）。
+
+
+
+
+  private HttpClient httpClient;
+        public ValuesController(HttpClient httpClient)
+        {
+            this.httpClient = httpClient;
+        }
+
+public HttpClient CreateHttpClient()
+        {
+            return HttpClientFactory.Create();
+        }
+
+2.4 HttpClientFactory 的主要工作就是创建 HttpClient 对象，但是在创建过程中，通过为每个 HttpClient 对象创建一个单独的清理句柄来对 HttpClient 进行跟踪和管理，
+以确保在对象使用完成后能够及时的释放网络请求的资源，也就是套接字，
+具体 HttpClientFactory 内部原理可参考 李志章-DotNetCore深入了解之三HttpClientFactory类.
+2.5 更重要的是，HttpClientFactory 内部管理着一个连接句柄池，一旦高并发的到来，HttpClientFactory 内句柄池内使用完成但是未被释放的句柄将被重新使用，
+虽然使用 HttpClientFactory.Create() 每次都是返回一个新的 HttpClient 对象，但是其背后的管理句柄是可以复用的，
+换句话说就是 “套接字复用”，而且还不会有 DNS 无法同步更新的问题

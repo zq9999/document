@@ -1,0 +1,55 @@
+运行时动态代理  灵活性高，性能相对“静态织入”低
+
+1.nuget安装 Castle.Core
+2.实现方法必须是virtual
+
+ public  interface IMyDBContext
+    {
+        void Insert();
+        void Update();
+        void Delete(); 
+    }
+    public class MyDBContext : IMyDBContext
+    {
+        public virtual  void Delete()
+        {
+            Debug.WriteLine("---Delete---");
+        }
+
+        public virtual void Insert()
+        {
+            Debug.WriteLine("---Insert---");
+        }
+
+        public virtual void Update()
+        {
+            Debug.WriteLine("---Update---");
+        }
+    }
+
+
+
+class CastleWindsorInterceptor : IInterceptor  //必须继承IInterceptor
+    {
+        public void Intercept(IInvocation invocation)
+        {
+            Proceeding(invocation);
+            invocation.Proceed();
+            Proceeded(invocation);
+        }
+
+        public void Proceeding(IInvocation invocation) {
+            Debug.WriteLine("执行前");
+        }
+        public void Proceeded(IInvocation invocation)
+        {
+            Debug.WriteLine("执行后");
+        }
+    }
+
+
+           //使用的时候
+            Castle.DynamicProxy.ProxyGenerator generator = new Castle.DynamicProxy.ProxyGenerator(); 
+            CastleWindsorInterceptor interceptor = new CastleWindsorInterceptor();
+            IMyDBContext _IMyDBContext = generator.CreateClassProxy<MyDBContext>(interceptor);
+            _IMyDBContext.Insert();

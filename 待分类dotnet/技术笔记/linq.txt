@@ -1,0 +1,16 @@
+Aggregate  对序列应用累加器函数。
+Zip  将指定函数应用于两个序列的对应元素，以生成结果序列
+SequenceEqual  查看两个序列中所有元素是否以相同顺序匹配
+OfType 筛选指定类型的元素
+Cast 转化为指定类型的元素
+GroupJoin 类似于 left join
+
+
+
+GetHashCode
+
+ if (Object.ReferenceEquals(other, null))
+                return false;
+            if (ReferenceEquals(this, other))
+                return true;
+            return ID.Equals(other.ID);
